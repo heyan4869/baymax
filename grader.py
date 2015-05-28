@@ -4,19 +4,19 @@ from scanner import *
 from math import *
 import parser
 
-def testGrader():
-    ## answer should be extracted from the student's homework
-    ## and return as a string
-    # str = imageReader()
+def testgrader():
+    # answer should be extracted from the student's homework
+    # and return as a string
+    # str = imagereader()
 
-    ## currently we use a presigned string for testing the function
+    # currently we use a presigned string for testing the function
     ocrresult = "12 + 5 - 2 * ( 7 - 1 ) = 5"
 
-    ## split the answer and get the formula as well as the answer
+    # split the answer and get the formula as well as the answer
     # use partition instead of split on the string
     diffpart = ocrresult.partition("=")
 
-    ## get the question and answer part
+    # get the question and answer part
     questionpart = diffpart[0]
     question = parser.expr(questionpart).compile()
     correctresult = eval(question)
@@ -30,5 +30,5 @@ def testGrader():
     else:
         return False
 
-checkresult = testGrader()
+checkresult = testgrader()
 print checkresult
