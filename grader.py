@@ -10,13 +10,14 @@ def testgrader():
     # and return as a string
     # str = imagereader()
 
-    # currently we use a presigned string for testing the function
-    ocrresult = "12 + 5 - 2 * ( 7 - 1 ) = 5 \n 3 * 2 - 4 = 3"
+    # currently use a presigned string for testing the function
+    ocrresult = "12 + 5 - 2 * ( 7 - 1 ) = 5 \n 3 * 2 - 4 = 3 \n 5 - 4 / 2 = 1"
 
     # when dealing with multiple questions and answers
     # split the string with \n first
     diffline = ocrresult.split(" \n ")
     numofline = len(diffline)
+    # save all the check result in a list
     checkresult = []
 
     # process each line as individual questions
@@ -44,9 +45,9 @@ def testgrader():
     return checkresult
 
 result = testgrader()
-print "The number of questions is: "
+print "The number of question is: "
 print len(result)
-print "Each result of the answer is as follows: "
+print "The result of each answer is: "
 for i in result:
     print i
 
