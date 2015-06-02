@@ -1,6 +1,6 @@
 __author__ = 'Yan'
 
-from scanner import *
+from ImageScan import *
 from math import *
 import parser
 

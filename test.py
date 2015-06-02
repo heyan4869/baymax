@@ -1,6 +1,7 @@
-__author__ = 'Yan'
+import numpy as np
+import cv2
 
-ocrresult = "12 + 5 - 2 * ( 7 - 1 ) = 5 \n 3 * 2 - 4 = 2"
-diffline = ocrresult.split("\n")
-for i in diffline:
-    print(i)
+img = cv2.imread('cc.jpg',0)
+cv2.imshow('cc',img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
