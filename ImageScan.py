@@ -12,5 +12,3 @@ def imagereader():
 
 # prob = imagereader()
 # print prob
-
-

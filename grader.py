@@ -8,7 +8,8 @@ import parser
 def testgradernewline():
     # answer should be extracted from the student's homework
     # and return as a string
-    # str = imagereader()
+
+    # ocrresult = ImageScan()
 
     # currently use a presigned string for testing the function
     ocrresult = "12 + 5 - 2 * ( 7 - 1 ) = 5 \n 5 * 2 - 4 = 6 \n 5 - 4 / 2 = 1"
@@ -29,17 +30,23 @@ def testgradernewline():
 
         # get the question and answer part
         questionpart = diffpart[0]
-        question = parser.expr(questionpart).compile()
-        correctresult = eval(question)
 
-        answerpart = diffpart[2]
-        # answer = parser.expr(answerpart).compile()
-        studentresult = eval(answerpart)
+        # try to valuate the right answer based on the string
+        try:
+            # question = parser.expr(questionpart).compile()
+            correctresult = eval(questionpart)
+            # print correctresult
+            answerpart = diffpart[2]
+            # answer = parser.expr(answerpart).compile()
+            studentresult = eval(answerpart)
 
-        if correctresult == studentresult:
-            checkresult.append(True)
-        else:
-            checkresult.append(False)
+            if correctresult == studentresult:
+                checkresult.append(True)
+            else:
+                checkresult.append(False)
+        # if there is an error exists, throw an exception
+        except (SyntaxError, ValueError):
+            print "OCR retrieved the formula with error"
 
     # return the result of grade in the format of a list
     return checkresult
@@ -50,7 +57,8 @@ def testgradernewline():
 def testgraderspace():
     # answer should be extracted from the student's homework
     # and return as a string
-    # str = imagereader()
+
+    # ocrresult = ImageScan()
 
     # currently use a presigned string for testing the function
     ocrresult = "12 + 5 - 2 * ( 7 - 1 ) = 5 5 * 2 - 4 = 6 5 - 4 / 2 = 1"
@@ -61,11 +69,12 @@ def testgraderspace():
     num = len(diffline)
     # print len(diffline)
 
-    for i in range(1, num - 1):
-        currline = diffline[i]
+    # process the splited string and get the question answer pair
+    for ith in range(1, num - 1):
+        currline = diffline[ith]
         diffpart = currline.split(" ", 1)
-        diffline[i - 1] = diffline[i - 1] + " = " + diffpart[0]
-        diffline[i] = diffpart[1]
+        diffline[ith - 1] = diffline[ith - 1] + " = " + diffpart[0]
+        diffline[ith] = diffpart[1]
 
     diffline[num - 2] = diffline[num - 2] + " = " + diffline[num - 1]
 
@@ -73,6 +82,7 @@ def testgraderspace():
     checkresult = []
 
     # with the appropriate question answer pair, check if the answer is right
+    # the range function does not include num - 1
     for temp in range(0, num - 1):
         eachline = diffline[temp]
         # split the answer and get the formula as well as the answer
@@ -81,17 +91,23 @@ def testgraderspace():
 
         # get the question and answer part
         questionpart = diffpart[0]
-        question = parser.expr(questionpart).compile()
-        correctresult = eval(question)
 
-        answerpart = diffpart[2]
-        # answer = parser.expr(answerpart).compile()
-        studentresult = eval(answerpart)
+        # try to valuate the right answer based on the string
+        try:
+            # question = parser.expr(questionpart).compile()
+            correctresult = eval(questionpart)
+            # print correctresult
+            answerpart = diffpart[2]
+            # answer = parser.expr(answerpart).compile()
+            studentresult = eval(answerpart)
 
-        if correctresult == studentresult:
-            checkresult.append(True)
-        else:
-            checkresult.append(False)
+            if correctresult == studentresult:
+                checkresult.append(True)
+            else:
+                checkresult.append(False)
+        # if there is an error exists, throw an exception
+        except (SyntaxError, ValueError):
+            print "OCR retrieved the formula with error"
 
     # return the result of grade in the format of a list
     return checkresult
@@ -104,5 +120,3 @@ print len(result)
 print "The result of each answer is: "
 for i in result:
     print i
-
-

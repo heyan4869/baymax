@@ -14,7 +14,7 @@ rampFrames = 30
 currCamera = cv2.VideoCapture(cameraPort)
 
 # captures a single image from the camera and returns it in PIL format
-def takeImage():
+def takeimage():
     # read is the easiest way to get a full image out of a VideoCapture object.
     retval, im = currCamera.read()
     return im
@@ -22,17 +22,17 @@ def takeImage():
 # ramp the camera then these frames will be discarded and are only used to allow v4l2
 # to adjust light levels, if necessary
 for i in xrange(rampFrames):
-    temp = takeImage()
+    temp = takeimage()
     print("Taking image...")
 
 # take the actual image we want to keep
-cameraCapture = takeImage()
-file = "/Users/Yan/Desktop/testImage.png"
+cameraCapture = takeimage()
+filename = "/Users/Yan/Desktop/testImage.png"
 
 # A nice feature of the imwrite method is that it will automatically choose the
 # correct format based on the file extension you provide. Convenient!
-cv2.imwrite(file, cameraCapture)
+cv2.imwrite(filename, cameraCapture)
 
 # release the camera, otherwise you won't be able to create a new
 # capture object as long as the script exits
-del(currCamera)
+del currCamera
