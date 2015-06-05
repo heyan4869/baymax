@@ -1,6 +1,6 @@
 import parser
 
-ocrresult = "12 + 5 - 2 * ( 7 - 1 ) = 5 5 * 2 - 4 = 6 5 - 4 / 2 = 1"
+ocrresult = "12 + 5 - 2 * ( 7 - 1 ) = 5 5 * 2] - 4 = 6 5 - 4 / 2 = 1"
 diffline = ocrresult.split(" = ")
 num = len(diffline)
 # print len(diffline)

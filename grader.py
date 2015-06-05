@@ -12,24 +12,29 @@ def testgradernewline():
     # ocrresult = ImageScan()
 
     # currently use a presigned string for testing the function
-    ocrresult = "12 + 5 - 2 * ( 7 - 1 ) = 5 \n 5 * 2 - 4 = 6 \n 5 - 4 / 2 = 1"
+    ocrresult = "12 - 4 + 2 * ( 7 - 1 ) = 5 \n 5 * 2 - 4 = 6 \n 5 - 4 / 2 = 1"
 
     # when dealing with multiple questions and answers
     # split the string with \n first
     diffline = ocrresult.split(" \n ")
-    numofline = len(diffline)
+    num = len(diffline)
+    # print num
     # save all the check result in a list
     checkresult = []
+    count = 0
 
     # process each line as individual questions
     # the head of each line must not be blankspace
     for eachline in diffline:
+        count += 1
         # split the answer and get the formula as well as the answer
         # use partition instead of split on the string
         diffpart = eachline.partition("=")
 
         # get the question and answer part
         questionpart = diffpart[0]
+        # print questionpart
+        # print eval(questionpart)
 
         # try to valuate the right answer based on the string
         try:
@@ -46,7 +51,7 @@ def testgradernewline():
                 checkresult.append(False)
         # if there is an error exists, throw an exception
         except (SyntaxError, ValueError):
-            print "OCR retrieved the formula with error"
+            print "OCR retrieved formula number " + str(count) + " has error"
 
     # return the result of grade in the format of a list
     return checkresult
@@ -107,7 +112,7 @@ def testgraderspace():
                 checkresult.append(False)
         # if there is an error exists, throw an exception
         except (SyntaxError, ValueError):
-            print "OCR retrieved the formula with error"
+            print "OCR retrieved formula number " + str(temp + 1) + " has error"
 
     # return the result of grade in the format of a list
     return checkresult
